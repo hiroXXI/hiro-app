@@ -1,0 +1,62 @@
+<%- include('../partials/header') %>
+
+<%- include('../partials/navbar') %>
+
+<%- include('../partials/flash') %>
+
+<div class="container mt-5 mb-5">
+  <div class="mb-1">
+    <form action="/mypage">
+      <button class="btn btn-info">戻る</button>
+    </form>
+  </div>
+  <div class="card text-center border-secondary">
+    <div class="card-header text-bg-secondary">言葉の編集削除</div>
+    <div class="p-2">
+      <form action="/comics/words/<%= word._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <div class="row mb-3">
+          <label class="col-form-label col-md-3" for="title">漫画タイトル</label>
+          <div class="col-md-9">
+            <input class="form-control" type="text" name="word[title]" id="title" value="<%= word.title %>" disabled/>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-form-label col-md-3" for="human">人物</label>
+          <div class="col-md-9">
+            <input class="form-control" type="text" name="word[human]" id="human" value="<%= word.human %>" required/>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-form-label col-md-3" for="number">巻数</label>
+          <div class="col-md-9">
+            <input class="form-control" type="number" name="word[number]" id="number" value="<%= word.number %>" placeholder="半角数字" required/>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-form-label col-md-3" for="word">言葉</label>
+          <div class="col-md-9">
+            <textarea class="form-control" name="word[word]" id="word" required><%= word.word %></textarea>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-form-label col-md-3" for="image">画像</label>
+          <div class="col-md-9">
+            <input class="form-control" type="file" name="word[image]" id="image" value="<%= word.image %>"/>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <p>現在の画像</p>
+          <img src="<%= word.image %>" alt="" />
+        </div>
+        <button class="btn btn-primary">更新する</button>
+      </form>
+    </div>
+  </div>
+  <div class="text-end mt-1">
+    <form action="/comics/<%= word.comic %>/words/<%= word._id %>?_method=DELETE" method="POST">
+      <button class="btn btn-danger">削除する</button>
+    </form>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

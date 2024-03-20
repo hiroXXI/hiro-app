@@ -1,0 +1,37 @@
+<%- include('../partials/header') %>
+
+<%- include('../partials/navbar') %>
+
+<%- include('../partials/flash') %>
+
+<div class="container mt-5 mb-5" style="width: 75%;">
+  <div class="card text-center border-secondary">
+    <div class="card-header text-bg-secondary">ユーザ登録</div>
+    <div class="p-2">
+      <form action="/signup" method="POST">
+        <div class="row mb-3">
+          <label class="col-form-label col-md-3" for="username">ユーザ名</label>
+          <div class="col-md-9">
+            <input class="form-control" type="text" name="username" id="username" required/>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-form-label col-md-3" for="password">パスワード</label>
+          <div class="col-md-9">
+            <input class="form-control" type="password" name="password" id="password" placeholder="8文字以上の英数字" required/>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-form-label col-md-3" for="repassword">パスワード再入力</label>
+          <div class="col-md-9">
+            <input class="form-control" type="password" name="repassword" id="repassword" placeholder="8文字以上の英数字" required/>
+          </div>
+        </div>
+        <button class="btn btn-primary">登録する</button>
+      </form>
+    </div>
+  </div>
+  <a href="/login">登録済みの方はこちら</a>
+</div>
+
+<%- include('../partials/footer') %>

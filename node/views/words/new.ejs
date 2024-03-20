@@ -1,0 +1,53 @@
+<%- include('../partials/header') %>
+
+<%- include('../partials/navbar') %>
+
+<%- include('../partials/flash') %>
+
+<div class="container mt-5 mb-5">
+  <div class="mb-1">
+    <form action="/mypage">
+      <button class="btn btn-info">戻る</button>
+    </form>
+  </div>
+  <div class="card text-center border-secondary">
+    <div class="card-header text-bg-secondary">言葉の新規投稿</div>
+    <div class="p-2">
+      <form action="/comics/words/new" method="POST" enctype="multipart/form-data">
+        <div class="row mb-3">
+          <label class="col-form-label col-md-3" for="title">漫画タイトル</label>
+          <div class="col-md-9">
+            <input class="form-control" type="text" name="word[title]" id="title" required/>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-form-label col-md-3" for="human">人物</label>
+          <div class="col-md-9">
+            <input class="form-control" type="text" name="word[human]" id="human" required/>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-form-label col-md-3" for="number">巻数</label>
+          <div class="col-md-9">
+            <input class="form-control" type="number" name="word[number]" id="number" placeholder="半角数字" required/>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-form-label col-md-3" for="word">言葉</label>
+          <div class="col-md-9">
+            <textarea class="form-control" name="word[word]" id="word" required></textarea>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-form-label col-md-3" for="image">画像</label>
+          <div class="col-md-9">
+            <input class="form-control" type="file" name="word[image]" id="image" required/>
+          </div>
+        </div>
+        <button class="btn btn-primary">投稿する</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
