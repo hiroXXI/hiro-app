@@ -11,7 +11,7 @@ const upload = multer({ storage: storage });
 const Comic = require('./models/comic');
 const path = require('path');
 const errorAsync = require('./utils/errorAsync');
-const { createWordSchema, createFileSchema, editSchema, userSchema } = require('./utils/validation');
+const { createValidation, editValidation, userValidation } = require('./utils/validation');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
@@ -109,60 +109,7 @@ app.use(helmet({
 }));
 
 
-// ミドルウェア周り
-const createValidation = (req, res, next) => {
-  const bodyError = createWordSchema.validate(req.body).error;
-  const fileError = createFileSchema.validate(req.file).error;
-  if(bodyError || fileError) {
-    req.flash('error', '無効なデータです。投稿内容を見直してください');
-    return res.redirect('/comics/words/new');
-  } else {
-    req.validationTitle = createWordSchema.validate(req.body).value.word.title
-    next();
-  };
-};
-
-const editValidation = async (req, res, next) => {
-  const bodyError = editSchema.validate(req.body).error;
-  if(bodyError) {
-    const word = await Word.findById(req.params.id);
-    req.flash('error', '無効なデータです。更新内容を見直してください');
-    return res.redirect(`/comics/words/${word._id}/edit`);
-  } else {
-    next();
-  };
-};
-
-const userValidation = async (req, res, next) => {
-  req.body.username = userSchema.validate(req.body).value.username
-  const findUser = await User.findOne({username: req.body.username})
-  if(findUser) {
-    req.flash('error', `ユーザ名 ${req.body.username} が既に使用されています`);
-    return res.redirect("/signup");
-  }
-  if(req.body.username.length < 2) {
-    req.flash('error', 'ユーザ名が短すぎます。2文字以上のユーザ名にしてください');
-    return res.redirect("/signup");
-  }
-  const regex = new RegExp('^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{8,}$')
-  if(req.body.password.length < 8 || !regex.test(req.body.password)) {
-    req.flash('error', 'パスワードは8文字以上の英数字にしてください');
-    return res.redirect("/signup");
-  }
-  if(req.body.password !== req.body.repassword) {
-    req.flash('error', 'パスワードとパスワード再入力が一致していません');
-    return res.redirect("/signup");
-  }
-  const bodyError = userSchema.validate(req.body).error;
-  if(bodyError) {
-    req.flash('error', '無効なデータです。登録内容を見直してください');
-    return res.redirect('/signup');
-  } else {
-    req.validationUsername = userSchema.validate(req.body).value.username
-    next();
-  };
-};
-
+// ミドルウェア
 const isUser = async (req, res, next) => {
   const word = await Word.findById(req.params.id);
   if(!word.user.equals(req.user._id)) {
