@@ -1,5 +1,5 @@
 # お気に入りワード共有アプリ「ふぁぼワード」
-![ホーム](https://github.com/hiroXXI/hiro-app/assets/157338104/1e034e7b-400a-46eb-bb62-7f2813f10989)
+![ホーム.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3683048/8adadcf3-e551-252f-78b8-6d2494922188.gif)
 
 好きな漫画の言葉を閲覧投稿するアプリです。
 
