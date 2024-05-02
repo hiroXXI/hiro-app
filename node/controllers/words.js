@@ -5,7 +5,6 @@ require('dotenv').config();
 const Comic = require('../models/comic');
 const User = require('../models/user');
 const Like = require('../models/like');
-const axios = require('axios');
 
 
 const s3Client = new S3Client({
@@ -61,8 +60,6 @@ module.exports.createWord = async (req, res) => {
 }
 
 module.exports.renderEditForm = async (req, res, next) => {
-  const weatherData = await axios.get('https://oa5gupc1zh.execute-api.ap-northeast-1.amazonaws.com/test')
-  console.log(weatherData)
     const word = await Word.findById(req.params.id);
     res.render("words/edit", { word: word });
 }
