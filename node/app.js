@@ -28,7 +28,6 @@ const likesController = require('./controllers/likes');
 const crypto = require('crypto')
 const showsController = require('./controllers/shows');
 const { dbConnection } = require('./models/connection');
-const axios = require('axios');
 
 
 dbConnection();
@@ -145,12 +144,6 @@ app.get('/', errorAsync(async (req, res) => {
     res.render('home', { words: words, likes: likes });
   };
 }));
-
-app.get("/test", errorAsync(async(req, res) => {
-  const weatherData = await axios.get('https://oa5gupc1zh.execute-api.ap-northeast-1.amazonaws.com/test')
-  console.log(weatherData)
-  res.send(weatherData)
-}))
 
 // 漫画画面
 app.get('/comics', errorAsync(async (req, res) => {
