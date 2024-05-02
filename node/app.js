@@ -210,7 +210,7 @@ app.all('*', (req, res) => {
 if(process.env.NODE_ENV === 'production') {
   app.use((err, req, res, next) => {
     req.flash('error', '無効なページです');
-    res.redirect('/');
+    res.send(err);
   });
 } else {
   app.use((err, req, res, next) => {
