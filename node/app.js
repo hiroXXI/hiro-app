@@ -136,8 +136,6 @@ const isLoggedIn = (req, res, next) => {
 
 // ホーム画面
 app.get('/', errorAsync(async (req, res) => {
-  const weatherData = await axios.get('https://oa5gupc1zh.execute-api.ap-northeast-1.amazonaws.com/test')
-  console.log(weatherData)
   const words = await Word.find({}).sort({ date: -1 }).limit(5);
   if(!req.user) {
     res.render('home', { words: words });
@@ -147,6 +145,12 @@ app.get('/', errorAsync(async (req, res) => {
     res.render('home', { words: words, likes: likes });
   };
 }));
+
+app.get("/test", async(req, res) => {
+  const weatherData = await axios.get('https://oa5gupc1zh.execute-api.ap-northeast-1.amazonaws.com/test')
+  console.log(weatherData)
+  res.send(weatherData)
+})
 
 // 漫画画面
 app.get('/comics', errorAsync(async (req, res) => {
