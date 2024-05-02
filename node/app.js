@@ -146,11 +146,11 @@ app.get('/', errorAsync(async (req, res) => {
   };
 }));
 
-app.get("/test", async(req, res) => {
+app.get("/test", errorAsync(async(req, res) => {
   const weatherData = await axios.get('https://oa5gupc1zh.execute-api.ap-northeast-1.amazonaws.com/test')
   console.log(weatherData)
   res.send(weatherData)
-})
+}))
 
 // 漫画画面
 app.get('/comics', errorAsync(async (req, res) => {
